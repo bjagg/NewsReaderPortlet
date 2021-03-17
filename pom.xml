@@ -69,15 +69,13 @@
 
     <repositories>
         <repository>
-            <id>java.net repository</id>
-            <url>http://download.java.net/maven/2</url>
+          <!-- for javax.script -->
+            <id>Atricore Repository</id>
+            <url>http://repository.atricore.org/m2-release-repository</url>
         </repository>
         <repository>
-            <id>jasig-3rd-party</id>
-            <name>Jasig 3rd Party Repository</name>
-            <url>http://developer.jasig.org/repo/content/repositories/3rd-party</url>
-            <releases><enabled>true</enabled></releases>
-            <snapshots><enabled>false</enabled></snapshots>
+          <id>Mulesoft Repository</id>
+          <url>https://repository.mulesoft.org/nexus/content/repositories/public/</url>
         </repository>
     </repositories>
 
@@ -816,24 +814,6 @@
                             </tasks>
                         </configuration>
                     </execution>
-                </executions>
-                <dependencies>
-                    <dependency>
-                        <groupId>javax.servlet</groupId>
-                        <artifactId>javax.servlet-api</artifactId>
-                        <version>${servlet-api.version}</version>
-                    </dependency>
-                    <dependency>
-                        <groupId>javax.portlet</groupId>
-                        <artifactId>portlet-api</artifactId>
-                        <version>2.0</version>
-                    </dependency>
-                </dependencies>
-            </plugin>
-            <!-- To import the news reader db tables, use mvn [-Ddir=dir] data-import -->
-            <plugin>
-                <artifactId>maven-antrun-plugin</artifactId>
-                <executions>
                     <execution>
                         <id>data-import</id>
                         <phase>data-import</phase>
@@ -908,6 +888,16 @@
                     </execution>
                 </executions>
                 <dependencies>
+                    <dependency>
+                        <groupId>javax.servlet</groupId>
+                        <artifactId>javax.servlet-api</artifactId>
+                        <version>${servlet-api.version}</version>
+                    </dependency>
+                    <dependency>
+                        <groupId>javax.portlet</groupId>
+                        <artifactId>portlet-api</artifactId>
+                        <version>2.0</version>
+                    </dependency>
                     <dependency>
                         <groupId>rhino</groupId>
                         <artifactId>js</artifactId>

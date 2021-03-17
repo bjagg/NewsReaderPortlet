@@ -82,11 +82,15 @@
           p:policies-ref="antisamyPolicies" p:entriesPerPage="10"/>
 
     <!-- RSS feed adapter -->
-    <bean id="httpClientConnectionManager" class="org.apache.http.impl.conn.PoolingClientConnectionManager"
-          p:maxTotal="200" p:defaultMaxPerRoute="20"/>
-    <bean id="httpClient" class="org.apache.http.impl.client.DefaultHttpClient"
-          c:conman-ref="httpClientConnectionManager">
+    <bean id="romeRetryHandler" class="org.jasig.portlet.newsreader.adapter.HttpClientRomeRetryHandler">
+        <constructor-arg index="0" value="2" />
     </bean>
+    <bean id="httpClientBuilder" class="org.apache.http.impl.client.HttpClientBuilder" factory-method="create">
+        <property name="maxConnTotal" value="200" />
+        <property name="maxConnPerRoute" value="20" />
+        <property name="retryHandler" ref="romeRetryHandler" />
+    </bean>
+    <bean id="httpClient" factory-bean="httpClientBuilder" factory-method="build" />
 
     <bean id="org.jasig.portlet.newsreader.adapter.RomeAdapter"
         class="org.jasig.portlet.newsreader.adapter.RomeAdapter" init-method="init"
